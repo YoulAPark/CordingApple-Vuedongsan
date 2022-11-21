@@ -4,7 +4,7 @@
 <!-- git Test 진행 중 3-->
 <div class="black-bg" v-if="모달창열렸니 == true">
   <div class="white-bg">
-      <h4>상태페이지</h4>
+      <h4>상태페이지입니다</h4>
       <p>상태페이지 내용</p>
       <button @click="모달창열렸니 = false">닫기</button>
   </div>
