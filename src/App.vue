@@ -1,51 +1,35 @@
 <!-- HTMl -->
 <template> 
 
-<!-- git Test 진행 중 3-->
-<div class="black-bg" v-if="모달창열렸니 == true">
-  <div class="white-bg">
-      <h4>상태페이지</h4>
-      <p>상태페이지 내용</p>
-      <button @click="모달창열렸니 = false">닫기</button>
-  </div>
-</div>
+<transition name="fade"> 
+  <Modal @closeModal="모달창열렸니=false" :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니"/>
+</transition>
 
+<Discount></Discount>
 <!-- 반복문 사용 --> 
 <div class="menu" >
   <a v-for="Item in 메뉴들" :key="Item">{{Item}}</a> 
 </div>
 
-<div>
-  <img src="./assets/room0.jpg" class="room-img">
-  <h4 @click="모달창열렸니 = true">{{products[0]}}</h4>
-  <p>50 만원</p>
-  <button @click="신고수[0]++">허위매물신고</button> <span>신고수 : {{ 신고수[0] }}</span>
- </div>
-
-<div>
-  <img src="./assets/room1.jpg" class="room-img">
-  <h4>{{products[1]}}</h4>
-  <p>0 만원</p>
-  <button @click="신고수[1]++">허위매물신고</button> <span>신고수 : {{ 신고수[1] }}</span>
-</div>
-
-<div>
-  <img src="./assets/room2.jpg" class="room-img"> 
-  <h4>{{products[2]}}</h4>
-  <p>50 만원</p>
-  <button @click="신고수[2]++">허위매물신고</button> <span>신고수 : {{ 신고수[2] }}</span>
-</div>
+<Card @openModal="모달창열렸니=true; 누른거=$event" :원룸들="원룸들[i]" v-for="(원룸,i) in 원룸들" :key="원룸"/>
 
 </template>
 
 <!-- Java Script -->
 <script>
 
+import data from './assets/data.js';
+import Discount from './Discount.vue';
+import ModalPage from './Modal.vue';
+import CardPage from './Card.vue';
 
 export default {
   name: 'App',
   data() {
     return {
+      user : ['user01', 'user02', 'user03', 'user04', 'user05'],
+      누른거 : 0, // 사용자가 지금 누른 상품의 번호를 기록
+      원룸들 : data, 
       모달창열렸니 : false,
       신고수 : [0,0,0],
       메뉴들 : ['Home', 'Shop', 'Products', 'About'],
@@ -55,15 +39,46 @@ export default {
   methods : {
     increase() {
       this.신고수++;
-    }
+    },
   },
-  components: {
+
+  components : {
+    Discount : Discount,
+    Modal : ModalPage,
+    Card : CardPage,
   }
 }
 </script>
 
 <!-- Style -->
 <style>
+.fade-enter-from { /* 애니메이션 시작시 스타일*/
+  transform : translateY(-1000px);
+} 
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to { /* 애니메이션 끝날시 스타일 */
+  transform : translateY(-0px);
+} 
+
+.fade-leave-from { /* 애니메이션 시작시 스타일*/
+  opacity: 1;
+} 
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to { /* 애니메이션 끝날시 스타일 */
+  opacity: 0;
+} 
+
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
 body {
   margin : 0
 }
