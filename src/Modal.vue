@@ -22,18 +22,17 @@ export default {
     },
     watch : {
       month(i) {
-        var num = /[0-9]/;
-        if (num.test(i)==false) {
-          alert("실패")
+        if(i>12) {
+          alert("할부는 12개월 이하만 가능합니다.")
+          this.month = 1;
+        } else if (isNaN(i) == true) {
+          alert("숫자만 입력가능합니다.")
+          this.month = 1;
         }
-        // if(i>12) {
-        //   alert("할부는 12개월 이하만 가능합니다.")
-        //   this.month = 1;
-        // } else if (isNaN(i) == true) {
-        //   alert("숫자만 입력가능합니다.")
-        //   this.month = 1;
-        // }
-        function a(2)
+        if(i==2) {
+          alert("2개월 할부는 불가하므로 3개월 이상 할부로 선택해주세요.")
+          this.month = 3;
+        }
       },
     },
     props : {
