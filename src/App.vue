@@ -1,6 +1,8 @@
 <!-- HTMl -->
 <template> 
 
+
+
 <transition name="fade"> 
   <Modal @closeModal="모달창열렸니=false" :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니"/>
 </transition>
@@ -28,6 +30,7 @@ import data from './assets/data.js';
 import Discount from './Discount.vue';
 import ModalPage from './Modal.vue';
 import CardPage from './Card.vue';
+import TestPage from './Test.vue';
 
 export default {
   name: 'App',
@@ -74,6 +77,7 @@ export default {
     Discount : Discount,
     Modal : ModalPage,
     Card : CardPage,
+    Test : TestPage,
   }
 }
 </script>
